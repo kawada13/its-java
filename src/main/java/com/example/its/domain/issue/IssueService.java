@@ -16,4 +16,8 @@ public class IssueService {
 
     return issueList;
   }
+
+  public void create(String summary, String description) {
+    issueRepository.insert(summary, description);
+  }
 }

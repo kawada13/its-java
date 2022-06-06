@@ -31,6 +31,7 @@ public class issueController {
   @PostMapping
   public String create(IssueForm form, Model model) {
 
+    issueService.create(form.getSummary(), form.getDescription());
     return showList(model);
   }
 }
