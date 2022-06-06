@@ -1,17 +1,18 @@
 package com.example.its.domain.issue;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class IssueService {
+
+  private final IssueRepository issueRepository;
+
   public List<IssueEntity> findAll() {
-    var issueList =
-        List.of(
-            new IssueEntity(1, "概要1", "説明１"),
-            new IssueEntity(2, "概要2", "説明2"),
-            new IssueEntity(3, "概要3", "説明3"));
+    var issueList = issueRepository.findAll();
 
     return issueList;
   }
