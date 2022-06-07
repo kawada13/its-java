@@ -32,6 +32,7 @@ public class issueController {
   public String create(IssueForm form, Model model) {
 
     issueService.create(form.getSummary(), form.getDescription());
-    return showList(model);
+    // リダイレクトさせることで、二重リクエストの対策せをする
+    return "redirect:/issues";
   }
 }
