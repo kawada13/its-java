@@ -4,6 +4,8 @@ import com.example.its.domain.issue.IssueService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +31,10 @@ public class issueController {
   }
 
   @PostMapping
-  public String create(IssueForm form, Model model) {
+  public String create(@Validated IssueForm form, BindingResult bindingResult, Model model) {
+    if (bindingResult.hasErrors()) {
+      return showCreationForm(form);
+    }
 
     issueService.create(form.getSummary(), form.getDescription());
     // リダイレクトさせることで、二重リクエストの対策せをする
