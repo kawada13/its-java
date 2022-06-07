@@ -12,7 +12,7 @@ public class IssueForm {
   @Size(max = 256)
   private String summary;
 
-  @Size(max = 256)
   @NotBlank
+  @Size(max = 256)
   private String description;
 }
