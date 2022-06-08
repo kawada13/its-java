@@ -19,7 +19,9 @@
     <tbody>
     <tr th:each="issue : ${issueList}">
         <th th:text="${issue.id}">(id)</th>
-        <td th:text="${issue.summary}">(summary)</td>
+        <td>
+            <a th:text="${issue.summary}" th:href="@{/issues/{issueId}(issueId=${issue.id})}">(summary)</a>
+        </td>
     </tr>
     </tbody>
 </table>
