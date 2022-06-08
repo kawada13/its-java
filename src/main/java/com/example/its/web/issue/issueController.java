@@ -1,15 +1,13 @@
 package com.example.its.web.issue;
 
+import com.example.its.domain.issue.IssueEntity;
 import com.example.its.domain.issue.IssueService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -39,5 +37,12 @@ public class issueController {
     issueService.create(form.getSummary(), form.getDescription());
     // リダイレクトさせることで、二重リクエストの対策せをする
     return "redirect:/issues";
+  }
+
+  @GetMapping("/{issueId}")
+  public String showDetail(@PathVariable("issueId") long issueId, Model model) {
+    var dummyEntity = new IssueEntity(1, "概要", "説明");
+    model.addAttribute("issue", dummyEntity);
+    return "issues/detail";
   }
 }
